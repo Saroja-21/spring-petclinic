@@ -4,15 +4,10 @@ pipeline:
   projectIdentifier: SN_Project
   orgIdentifier: default
   tags: {}
-  properties:
-    ci:
-      codebase:
-        connectorRef: Pet_Clinic
-        build: <+input>
   stages:
     - stage:
-        name: Build Stage
-        identifier: Build_Stage
+        name: Build_Test
+        identifier: Build_Test
         description: ""
         type: CI
         spec:
@@ -32,10 +27,15 @@ pipeline:
             steps:
               - step:
                   type: Run
-                  name: Maven Build
-                  identifier: Maven_Build
+                  name: Build and Test
+                  identifier: Build_and_Test
                   spec:
                     connectorRef: account.harnessImage
                     image: maven:3.9.6-eclipse-temurin-17
-                    shell: Sh
-                    command: mvn clean package
+                    shell: Bash
+                    command: mvn clean test
+  properties:
+    ci:
+      codebase:
+        connectorRef: Pet_Clinic
+        build: <+input>
