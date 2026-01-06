@@ -35,9 +35,7 @@ pipeline:
                   name: Maven Build
                   identifier: Maven_Build
                   spec:
+                    connectorRef: account.harnessImage
+                    image: maven:3.9.6-eclipse-temurin-17
                     shell: Sh
-                    command: |-
-                      export JAVA_HOME=/opt/java/openjdk
-                      export PATH=$JAVA_HOME/bin:$PATH
-                      java -version
-                      mvn clean package
+                    command: mvn clean package
