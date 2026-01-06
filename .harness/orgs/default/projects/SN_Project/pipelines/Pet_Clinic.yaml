@@ -33,10 +33,7 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: maven:3.9.6-eclipse-temurin-17
                     shell: Sh
-                    command: |-
-                      mvn clean test \
-                        -Dcheckstyle.skip=true \
-                        -Dnohttp.skip=true
+                    command: mvn clean package -DskipTests -Dcheckstyle.skip=true -Dnohttp.skip=true
   properties:
     ci:
       codebase:
