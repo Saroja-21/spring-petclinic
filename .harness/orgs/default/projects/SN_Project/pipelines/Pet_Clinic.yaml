@@ -34,6 +34,48 @@ pipeline:
                     image: maven:3.9.6-eclipse-temurin-17
                     shell: Sh
                     command: mvn clean package -DskipTests -Dcheckstyle.skip=true -Dnohttp.skip=true
+    - stage:
+        name: Node_Cache
+        identifier: Node_Cache
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: GitClone
+                  name: Clone Node Repo
+                  identifier: Clone_Node_Repo
+                  spec:
+                    connectorRef: GitHub_Generic
+                    cloneDirectory: /harness/node-app
+                    build:
+                      type: branch
+                      spec:
+                        branch: main
+              - step:
+                  type: Run
+                  name: npm install
+                  identifier: npm_install
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: node:18-alpine
+                    shell: Sh
+                    command: |-
+                      cd /harness/node-app
+                      npm install
   properties:
     ci:
       codebase:
