@@ -32,8 +32,8 @@ pipeline:
                   spec:
                     connectorRef: account.harnessImage
                     image: maven:3.9.6-eclipse-temurin-17
-                    shell: Bash
-                    command: mvn clean test
+                    shell: Sh
+                    command: mvn clean test -Dnohttp=true
   properties:
     ci:
       codebase:
