@@ -1,0 +1,43 @@
+pipeline:
+  name: "Pet Clinic "
+  identifier: Pet_Clinic
+  projectIdentifier: SN_Project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: Pet_Clinic
+        build: <+input>
+  stages:
+    - stage:
+        name: Build Stage
+        identifier: Build_Stage
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Maven Build
+                  identifier: Maven_Build
+                  spec:
+                    shell: Sh
+                    command: |-
+                      export JAVA_HOME=/opt/java/openjdk
+                      export PATH=$JAVA_HOME/bin:$PATH
+                      java -version
+                      mvn clean package
