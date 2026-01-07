@@ -41,3 +41,14 @@ pipeline:
                       type: branch
                       spec:
                         branch: main
+              - step:
+                  type: Run
+                  name: npm install
+                  identifier: npm_install
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: node:18-alpine
+                    shell: Sh
+                    command: |-
+                      cd /harness/node-app
+                      npm install
