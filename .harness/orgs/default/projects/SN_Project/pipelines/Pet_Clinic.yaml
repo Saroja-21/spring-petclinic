@@ -15,6 +15,7 @@ pipeline:
           caching:
             enabled: true
             override: true
+            paths: []
           buildIntelligence:
             enabled: true
           platform:
@@ -34,6 +35,8 @@ pipeline:
                     image: maven:3.9.6-eclipse-temurin-17
                     shell: Sh
                     command: mvn clean package -DskipTests -Dcheckstyle.skip=true -Dnohttp.skip=true
+          sharedPaths:
+            - /harness/.m2
     - stage:
         name: Node_Cache
         identifier: Node_Cache
@@ -44,6 +47,7 @@ pipeline:
           caching:
             enabled: true
             override: true
+            paths: []
           buildIntelligence:
             enabled: true
           platform:
@@ -76,6 +80,10 @@ pipeline:
                     command: |-
                       cd /harness/node-app
                       npm install
+          sharedPaths:
+            - /harness/.npm
+            - /harness/node_modules
+            - /harness/.cache
   properties:
     ci:
       codebase:
