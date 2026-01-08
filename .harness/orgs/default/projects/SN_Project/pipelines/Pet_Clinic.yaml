@@ -35,6 +35,11 @@ pipeline:
                     image: maven:3.9.6-eclipse-temurin-17
                     shell: Sh
                     command: mvn clean package -DskipTests -Dcheckstyle.skip=true -Dnohttp.skip=true
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - target/surefire-reports/*.xml
           sharedPaths:
             - /harness/.m2
     - stage:
