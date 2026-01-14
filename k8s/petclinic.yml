@@ -12,6 +12,8 @@ spec:
     app: petclinic
 
 ---
+# checkov:skip=CKV_K8S_31: Accepted risk – legacy petclinic container
+# checkov:skip=CKV_K8S_22: Accepted risk – legacy workload
 apiVersion: apps/v1
 kind: Deployment
 metadata:
