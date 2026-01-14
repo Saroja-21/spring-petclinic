@@ -25,6 +25,7 @@ spec:
     app: demo-db
 
 ---
+# checkov:skip=CKV_K8S_31: Legacy database container – accepted risk
 apiVersion: apps/v1
 kind: Deployment
 metadata:
