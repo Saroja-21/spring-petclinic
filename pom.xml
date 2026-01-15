@@ -156,6 +156,12 @@
       <artifactId>testcontainers-mysql</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- Intentionally added vulnerable dependency for SCA AI remediation testing -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.14.0</version>
+    </dependency>
   </dependencies>
 
   <build>
