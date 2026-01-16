@@ -33,16 +33,21 @@ spec:
       containers:
         - name: workload
           image: dsyer/petclinic
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
           env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: postgres
-            - name: SERVICE_BINDING_ROOT
-              value: /bindings
-            - name: SPRING_APPLICATION_JSON
-              value: |
-                {
-                  "management.endpoint.health.probes.add-additional-paths": true
-                }
+              - name: SPRING_PROFILES_ACTIVE
+                value: postgres
+              - name: SERVICE_BINDING_ROOT
+                value: /bindings
+              - name: SPRING_APPLICATION_JSON
+                value: |
+                  {
+                    "management.endpoint.health.probes.add-additional-paths": true
+                  }
+
           ports:
             - name: http
               containerPort: 8080
