@@ -44,6 +44,10 @@ spec:
       containers:
         - image: postgres:18.1
           name: postgresql
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
           env:
             - name: POSTGRES_USER
               valueFrom:
