@@ -41,6 +41,10 @@ spec:
       labels:
         app: demo-db
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
       containers:
         - image: postgres:18.1
           name: postgresql
